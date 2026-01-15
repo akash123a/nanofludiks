@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\HomeSectionController;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\OrderController;
 
 
 use App\Models\Slider;
@@ -17,11 +18,20 @@ Route::get('/', function () {
 });
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/user/dashboard', function () {
-        return view('user.dashboard');
-    })->name('user.dashboard');
-});
+
+Route::post('/order/{product}', [OrderController::class, 'store'])
+    ->middleware('auth')
+    ->name('order.store');
+
+Route::get('/user/dashboard', [DashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('user.dashboard');
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/user/dashboard', function () {
+//         return view('user.dashboard');
+//     })->name('user.dashboard');
+// });
 
 
 

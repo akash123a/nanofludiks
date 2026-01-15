@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id','product_id','quantity'];
+    protected $fillable = ['user_id',  'product_id',  'product_name','quantity'];
 
     public function user(){
         return $this->belongsTo(User::class);
