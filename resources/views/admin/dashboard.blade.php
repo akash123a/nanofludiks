@@ -11,5 +11,8 @@
     @include('admin.blog.index');
     @include('admin.slider.index');
     @include('admin.homesection.index');
-    @include('admin.service-section.index');
+    @include('admin.career.index');
+    @include('admin.products.index');
+
+    {{-- @include('admin.service-section.index'); --}}
 @endsection

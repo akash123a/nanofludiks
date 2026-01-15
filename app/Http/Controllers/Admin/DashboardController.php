@@ -8,6 +8,9 @@ use App\Models\Blog;
 use App\Models\Slider; 
 use App\Models\HomeSection;
 use App\Models\Service;
+use App\Models\Faq;
+use App\Models\CareerApplication;
+use App\Models\Product;
 
 class DashboardController extends Controller
 {
@@ -19,7 +22,9 @@ class DashboardController extends Controller
       $sliders = Slider::all();
            $home = HomeSection::first(); 
            $services = Service::all();
-
-    return view('admin.dashboard', compact('blogs', 'sliders', 'home', 'services'));
+           $faq  = Faq::all();      
+        $applications = CareerApplication::all();
+        $products = Product::all();
+    return view('admin.dashboard', compact('blogs', 'sliders', 'home', 'services', 'faq','applications','products'));
 }
 }

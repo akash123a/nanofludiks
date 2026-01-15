@@ -32,7 +32,7 @@
                              <th style="width: 180px;">Actions</th>
                          </tr>
                      </thead>
-                                
+
                      <tbody>
                          @foreach ($sliders as $slider)
                              <tr>

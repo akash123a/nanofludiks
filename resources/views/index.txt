@@ -1,0 +1,20 @@
+
+Admin login → /admin/login (already done ✅)
+User login → /login
+User register → /register
+User dashboard → /user/dashboard
+
+
+
+
+
+
+users
+products
+orders        (who bought what)
+wishlists     (who wishlisted what)
+
+
+
+
+

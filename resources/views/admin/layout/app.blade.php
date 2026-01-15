@@ -36,6 +36,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -219,13 +233,24 @@
                 <a href="{{ route('admin.blog.index') }}" class="sidebar-item d-block">
                     <i class="bi bi-people"></i> Blogs
                 </a>
-                <a href="{{ route('services.index') }}" class="sidebar-item d-block">
+                {{-- <a href="{{ route('services.index') }}" class="sidebar-item d-block">
+                    <i class="bi bi-people"></i> Service-section
+                </a> --}}
+                <a href=" " class="sidebar-item d-block">
                     <i class="bi bi-people"></i> Service-section
                 </a>
 
-                <a href="#" class="sidebar-item d-block">
-                    <i class="bi bi-bar-chart"></i> Analytics
+                <a href="{{ route('faq.index') }}" class="sidebar-item d-block">
+                    <i class="bi bi-bar-chart"></i> Faqs
                 </a>
+                <a href="{{ route('career') }}" class="sidebar-item d-block">
+                    <i class="bi bi-bar-chart"></i> Career Applications
+                </a>
+                <a href="{{ route('admin.products.index') }}"
+                    class="sidebar-item d-block {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart"></i> Products
+                </a>
+
                 <a href="#" class="sidebar-item d-block">
                     <i class="bi bi-gear"></i> Settings
                 </a>

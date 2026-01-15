@@ -6,7 +6,27 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeSectionController;
 use App\Http\Controllers\Admin\ServiceSectionController;
+use App\Http\Controllers\Admin\faqController;
+use App\Http\Controllers\Admin\CareerController;
+use App\Http\Controllers\Auth\UserAuthController;
 
+use App\Models\CareerApplication;
+
+
+
+
+
+
+
+/* ================= USER AUTH ================= */
+
+Route::get('/login', [UserAuthController::class, 'login'])->name('login');
+Route::post('/login', [UserAuthController::class, 'loginPost']);
+
+Route::get('/register', [UserAuthController::class, 'register']);
+Route::post('/register', [UserAuthController::class, 'registerPost']);
+
+Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
 
 
 
@@ -32,7 +52,9 @@ Route::middleware('admin')->group(function () {
 
     
     Route::resource('services', \App\Http\Controllers\Admin\ServiceSectionController::class);
-
+    Route::resource('faq', \App\Http\Controllers\Admin\FaqController::class);
+    
+    Route::get('career', [CareerController::class, 'index'])->name('career');
 
 
 });
