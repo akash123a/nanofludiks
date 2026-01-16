@@ -1,25 +1,11 @@
- {{-- <!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>User Dashboard</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+@section('title', 'User Dashboard')
 
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
-        }
-    </style>
-</head>
+@section('content')
 
-<body>
     @if (session('success'))
-        <p style="color: green;">
+        <p style="color: green; padding: 10px; background-color: #e8f5e9; border-radius: 4px;">
             {{ session('success') }}
         </p>
     @endif
@@ -31,14 +17,49 @@
 
     <h2>Products</h2>
 
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .buy-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .wishlist-btn {
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+
     <table>
         <tr>
             <th>#</th>
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
-            <th>Action</th>
-
+            <th>Actions</th>
         </tr>
 
         @forelse($products as $product)
@@ -47,36 +68,32 @@
                 <td>{{ $product->name }}</td>
                 <td>₹ {{ $product->price }}</td>
                 <td>{{ $product->description }}</td>
-                <td>
+                <td class="actions">
                     <form method="POST" action="{{ route('order.store', $product->id) }}">
                         @csrf
-                        <button type="submit">Buy</button>
+                        <button type="submit" class="buy-btn">Buy</button>
+                    </form>
+
+                    <form method="POST" action="{{ route('wishlist.store', $product->id) }}">
+                        @csrf
+                        <button type="submit" class="wishlist-btn">❤️ Wishlist</button>
                     </form>
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="4">No products found</td>
+                <td colspan="5">No products found</td>
             </tr>
         @endforelse
     </table>
 
-    <br>
-
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-
-</body>
-
-</html> --}}
+@endsection
 
 
 
 
 
-
+{{-- 
 
  <!DOCTYPE html>
  <html>
@@ -179,4 +196,4 @@
 
  </body>
 
- </html>
+ </html> --}}

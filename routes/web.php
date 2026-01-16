@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\PaymentController;
 
 
 use App\Models\Slider;
@@ -19,6 +20,25 @@ Route::get('/', function () {
 });
 
 
+Route::get('/payment/{order}', [PaymentController::class, 'show'])
+    ->middleware('auth')
+    ->name('payment.page');
+
+
+    Route::post('/payment-success', [PaymentController::class, 'success'])
+    ->name('payment.success');
+
+    Route::get('/payment/{order}', [PaymentController::class, 'show'])
+    ->name('payment.page');
+
+
+    Route::get('/user/wishlist', [WishlistController::class, 'index'])
+    ->middleware('auth')
+    ->name('wishlist.index');
+
+Route::delete('/wishlist/{product}', [WishlistController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('wishlist.destroy');
 
 Route::post('/wishlist/{product}', [WishlistController::class, 'store'])
     ->middleware('auth')

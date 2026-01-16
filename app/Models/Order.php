@@ -5,8 +5,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id',  'product_id',  'product_name','quantity'];
-
+  protected $fillable = [
+    'user_id',
+    'product_id',
+    'product_name',
+    'quantity',
+    'amount',
+    'payment_method',
+    'payment_id',
+    'razorpay_order_id',
+    'status'
+];
     public function user(){
         return $this->belongsTo(User::class);
     }
