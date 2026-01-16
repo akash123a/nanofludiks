@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\WishlistController;
 
 
 use App\Models\Slider;
@@ -18,6 +19,10 @@ Route::get('/', function () {
 });
 
 
+
+Route::post('/wishlist/{product}', [WishlistController::class, 'store'])
+    ->middleware('auth')
+    ->name('wishlist.store');
 
 Route::post('/order/{product}', [OrderController::class, 'store'])
     ->middleware('auth')
