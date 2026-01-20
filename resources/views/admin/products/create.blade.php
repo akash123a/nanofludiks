@@ -3,7 +3,8 @@
 
 <head>
     <title>Add Product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        enctype="multipart/form-data">
 </head>
 
 <body>
@@ -17,6 +18,15 @@
             <div class="mb-3">
                 <label>Product Name</label>
                 <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                @error('name')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
+
+            <div class="mb-3">
+                <label>Product Image</label>
+                <input type="file" name="image" class="form-control" value="{{ old('file') }}">
                 @error('name')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

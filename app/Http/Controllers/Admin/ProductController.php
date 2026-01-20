@@ -21,38 +21,65 @@ class ProductController extends Controller
         return view('admin.products.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'description' => 'nullable'
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'description' => 'nullable',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+    ]);
 
-      Product::create($request->only('name', 'price', 'description'));
+    $imageName = null;
 
-        return redirect()->route('admin.products.index')
-                         ->with('success', 'Product added successfully');
+    if ($request->hasFile('image')) {
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('products', $imageName, 'public');
     }
+
+    Product::create([
+        'name' => $request->name,
+        'price' => $request->price,
+        'description' => $request->description,
+        'image' => $imageName
+    ]);
+
+    return redirect()->route('admin.products.index')
+        ->with('success', 'Product added successfully');
+}
+
 
     public function edit(Product $product)
     {
         return view('admin.products.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
-    {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required|numeric',
-            'description' => 'nullable'
-        ]);
+ public function update(Request $request, Product $product)
+{
+    $request->validate([
+        'name' => 'required',
+        'price' => 'required|numeric',
+        'description' => 'nullable',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+    ]);
 
-        $product->update($request->all());
+    if ($request->hasFile('image')) {
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('products', $imageName, 'public');
 
-        return redirect()->route('admin.products.index')
-                         ->with('success', 'Product updated successfully');
+        $product->image = $imageName;
     }
+
+    $product->name = $request->name;
+    $product->price = $request->price;
+    $product->description = $request->description;
+    $product->save();
+
+    return redirect()->route('admin.products.index')
+        ->with('success', 'Product updated successfully');
+}
+
+
 
     public function destroy(Product $product)
     {

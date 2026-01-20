@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name','price','description'];
+    protected $fillable = ['name','price','description' , 'image'];
 
     public function orders(){
         return $this->hasMany(Order::class);

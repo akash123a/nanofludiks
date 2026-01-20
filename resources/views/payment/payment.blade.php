@@ -7,7 +7,7 @@
 </head>
 
 <body>
-
+ 
     <h2>Pay for Order #{{ $order->id }}</h2>
     <p><strong>Product:</strong> {{ $order->product_name }}</p>
     <h2>Pay ₹{{ $order->amount }}</h2>

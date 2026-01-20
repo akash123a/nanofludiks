@@ -20,6 +20,7 @@
                      <th>Name</th>
                      <th>Price</th>
                      <th>Description</th>
+                     <th>Image</th>
                      <th width="180">Action</th>
                  </tr>
              </thead>
@@ -32,6 +33,15 @@
                          <td>{{ $product->name }}</td>
                          <td>₹ {{ $product->price }}</td>
                          <td>{{ $product->description }}</td>
+
+                         <td>
+                             @if ($product->image)
+                                 <img src="{{ asset('storage/products/' . $product->image) }}" width="60">
+                             @else
+                                 No Image
+                             @endif
+                         </td>
+
                          <td>
                              <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning">
                                  Edit

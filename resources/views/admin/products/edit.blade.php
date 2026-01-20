@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <h3>Edit Product</h3>
 
-        <form action="{{ route('admin.products.update', $product->id) }}" method="POST">
+        <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -28,6 +28,14 @@
             <div class="mb-3">
                 <label>Description</label>
                 <textarea name="description" class="form-control">{{ $product->description }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label>Image</label>
+                <input type="file" name="image" class="form-control mb-2">
+
+                @if ($product->image)
+                    <img src="{{ asset('storage/products/' . $product->image) }}" width="100">
+                @endif
             </div>
 
             <button class="btn btn-primary">Update</button>

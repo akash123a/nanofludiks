@@ -15,8 +15,41 @@ public function index()
         ->where('user_id', auth()->id())
         ->get();
 
-    return view('user.wishlist', compact('wishlists'));
+
+           // ✅ Total price of wishlist
+    $totalPrice = $wishlists->sum(function ($item) {
+        return $item->product->price;
+    });
+
+    return view('user.wishlist', compact('wishlists','totalPrice'));
 }
+
+public function buyAll()
+{
+    $wishlists = Wishlist::with('product')
+        ->where('user_id', auth()->id())
+        ->get();
+
+    if ($wishlists->isEmpty()) {
+        return back()->with('error', 'Wishlist is empty');
+    }
+
+    foreach ($wishlists as $item) {
+        auth()->user()->orders()->create([
+            'product_id' => $item->product->id,
+            'price' => $item->product->price,
+        ]);
+    }
+
+    // Clear wishlist after purchase
+    Wishlist::where('user_id', auth()->id())->delete();
+
+    return redirect()
+        ->route('wishlist.index')
+        ->with('success', 'All wishlist items purchased successfully!');
+}
+
+
 
 
 

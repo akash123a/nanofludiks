@@ -11,6 +11,7 @@ class HomeSectionController extends Controller
       public function index()
     {
         $home = HomeSection::first();
+        
         return view('admin.homesection.index', compact('home'));
     }
 

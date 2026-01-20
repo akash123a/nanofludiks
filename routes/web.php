@@ -44,6 +44,9 @@ Route::post('/wishlist/{product}', [WishlistController::class, 'store'])
     ->middleware('auth')
     ->name('wishlist.store');
 
+    Route::post('/wishlist/buy-all', [WishlistController::class, 'buyAll'])
+    ->name('wishlist.buyAll');
+
 Route::post('/order/{product}', [OrderController::class, 'store'])
     ->middleware('auth')
     ->name('order.store');
