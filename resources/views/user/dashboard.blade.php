@@ -10,7 +10,7 @@
         </p>
     @endif
 
-    <h1>Welcome, {{ auth()->user()->name }}</h1>
+    <h1>Welcome, {{ auth()->user()->name ?? '' }}</h1>
     <p>You are logged in successfully.</p>
 
     <hr>
@@ -372,7 +372,7 @@
         @endif
     </div>
 
-  
+
 
 @endsection
 

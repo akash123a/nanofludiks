@@ -13,10 +13,12 @@ use App\Http\Controllers\PaymentController;
 
 
 use App\Models\Slider;
+use App\Models\Product;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Product::all();
+    return view('welcome',compact('products'));
 });
 
 
@@ -54,6 +56,9 @@ Route::post('/order/{product}', [OrderController::class, 'store'])
 Route::get('/user/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('user.dashboard');
+
+    Route::post('/wishlist/{id}/quantity', [WishlistController::class, 'updateQuantity'])
+    ->name('wishlist.quantity');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/user/dashboard', function () {

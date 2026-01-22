@@ -18,7 +18,7 @@ public function index()
 
            // ✅ Total price of wishlist
     $totalPrice = $wishlists->sum(function ($item) {
-        return $item->product->price;
+        return $item->product->price  * $item->quantity;
     });
 
     return view('user.wishlist', compact('wishlists','totalPrice'));
@@ -48,6 +48,31 @@ public function buyAll()
         ->route('wishlist.index')
         ->with('success', 'All wishlist items purchased successfully!');
 }
+
+
+
+        public function updateQuantity(Request $request, $id)
+{
+    $wishlist = Wishlist::where('id', $id)
+        ->where('user_id', auth()->id())
+        ->firstOrFail();
+
+    if ($request->action === 'increase') {
+        $wishlist->quantity++;
+    }
+
+    if ($request->action === 'decrease' && $wishlist->quantity > 1) {
+        $wishlist->quantity--;
+    }
+
+    $wishlist->save();
+
+    return back();
+}
+
+
+
+
 
 
 

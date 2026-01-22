@@ -121,8 +121,66 @@
              </div>
          @endif
      </div>
+     <div class="quantity-control">
+         <form method="POST" action="{{ route('wishlist.quantity', $item->id) }}">
+             @csrf
+             <input type="hidden" name="action" value="decrease">
+             <button class="qty-btn">−</button>
+         </form>
+
+         <span class="qty-number">{{ $item->quantity }}</span>
+
+         <form method="POST" action="{{ route('wishlist.quantity', $item->id) }}">
+             @csrf
+             <input type="hidden" name="action" value="increase">
+             <button class="qty-btn">+</button>
+         </form>
+     </div>
+
+     <div class="item-price">
+         ₹{{ number_format($item->product->price * $item->quantity, 2) }}
+     </div>
+
+
+
 
      <style>
+         .quantity-control {
+             display: flex;
+             align-items: center;
+             gap: 12px;
+             margin-bottom: 15px;
+         }
+
+         .qty-btn {
+             width: 36px;
+             height: 36px;
+             border-radius: 50%;
+             border: none;
+             background: #ff4081;
+             color: white;
+             font-size: 20px;
+             font-weight: bold;
+             cursor: pointer;
+             transition: 0.2s;
+         }
+
+         .qty-btn:hover {
+             background: #e73370;
+         }
+
+         .qty-number {
+             font-size: 1.2rem;
+             font-weight: 600;
+             min-width: 30px;
+             text-align: center;
+         }
+
+
+
+
+
+
          .wishlist-container {
              max-width: 1200px;
              margin: 0 auto;
